@@ -28,6 +28,7 @@ namespace Integration.Tests
 
         [InlineData("AspNetMvcTemplate", "TemplateMvc.csproj", "")]
         [InlineData("WpfSample", "BeanTrader.sln", "BeanTraderClient.csproj")]
+        [InlineData("ConsoleSample", "ConsoleApp1.sln", "ConsoleApp1.csproj")]
         [Theory]
         public async Task UpgradeTest(string scenarioName, string inputFileName, string entrypoint)
         {
