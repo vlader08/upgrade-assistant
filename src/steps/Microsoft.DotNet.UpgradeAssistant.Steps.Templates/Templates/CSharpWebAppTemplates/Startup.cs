@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 
 namespace WebApplication1
@@ -29,6 +31,9 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSystemWebShim()
+                .AddDefaults();
+
             services.AddControllersWithViews(ConfigureMvcOptions)
                 // Newtonsoft.Json is added for compatibility reasons
                 // The recommended approach is to use System.Text.Json for serialization
@@ -38,7 +43,6 @@ namespace WebApplication1
                 {
                     options.UseMemberCasing();
                 });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +54,20 @@ namespace WebApplication1
             }
 
             app.UseStaticFiles();
+
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content")),
+                RequestPath = "/content"
+            });
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts")),
+                RequestPath = "/scripts"
+            });
+
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
@@ -61,7 +79,7 @@ namespace WebApplication1
         }
 
         private void ConfigureMvcOptions(MvcOptions mvcOptions)
-        { 
+        {
         }
     }
 }

@@ -23,10 +23,7 @@ namespace Microsoft.DotNet.UpgradeAssistant.Extensions.Default.ConfigUpdaters
         private const string ViewImportsInitialContent = "@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers";
         private const string RazorUsingPrefix = "@using ";
 
-        private static readonly string[] NamespacesToDrop = new[]
-        {
-            "System.Web"
-        };
+        private static readonly string[] NamespacesToDrop = Array.Empty<string>();
 
         private readonly ILogger<AppSettingsConfigUpdater> _logger;
         private IEnumerable<string> _namespacesToUpgrade;

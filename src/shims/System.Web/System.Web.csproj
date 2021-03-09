@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFrameworks>net5.0;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoWarn>$(NoWarn);CA1813;CA5395;CA3147;CA2243;CA2227;CA1309;SYSWEB0001;SYSWEB0002;SYSWEB0003;SYSWEB0004</NoWarn>
+    <IsShipping>true</IsShipping>
+    <IsPackable>true</IsPackable>
+    <AssemblyName>System.Web.Sim</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Compile Remove="**/*.cs" />
+  </ItemGroup>
+
+</Project>
