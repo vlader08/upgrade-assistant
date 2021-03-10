@@ -37,5 +37,7 @@ namespace Microsoft.DotNet.UpgradeAssistant
         IEnumerable<string> FindFiles(ProjectItemType itemType, ProjectItemMatcher matcher);
 
         IProjectFile GetFile();
+
+        bool UpdatedNugets { get; set; }
     }
 }

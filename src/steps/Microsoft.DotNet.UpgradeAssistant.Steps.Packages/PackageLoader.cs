@@ -105,7 +105,7 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Packages
                 var metadata = await Repository.Factory.GetCoreV3(source).GetResourceAsync<PackageMetadataResource>(token).ConfigureAwait(false);
                 try
                 {
-                    var searchResults = await CallWithRetryAsync(() => metadata.GetMetadataAsync(packageName, includePrerelease: includePreRelease, includeUnlisted: false, _cache, NuGet.Common.NullLogger.Instance, token)).ConfigureAwait(false);
+                    var searchResults = await CallWithRetryAsync(() => metadata.GetMetadataAsync(packageName, includePreRelease, false, _cache, NuGet.Common.NullLogger.Instance, token)).ConfigureAwait(false);
                     var highestVersionResult = searchResults.Select(r => r.Identity.Version).Max(v => v);
                     if (highestVersionResult is null)
                     {

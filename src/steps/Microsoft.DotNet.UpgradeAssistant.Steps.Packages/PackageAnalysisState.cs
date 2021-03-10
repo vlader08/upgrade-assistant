@@ -15,6 +15,8 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Packages
 
         public string PackageCachePath { get; private set; } = default!;
 
+        public IList<NuGetReference> PackagesToUpgrade { get; }
+
         public IList<NuGetReference> PackagesToAdd { get; }
 
         public IList<NuGetReference> PackagesToRemove { get; }
@@ -32,6 +34,7 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Packages
             PackagesToRemove = new List<NuGetReference>();
             PackagesToAdd = new List<NuGetReference>();
             ReferencesToRemove = new List<Reference>();
+            PackagesToUpgrade = new List<NuGetReference>();
             Failed = false;
             PossibleBreakingChangeRecommended = false;
         }

@@ -163,6 +163,8 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Packages
                 }
                 while (_analysisState is not null && _analysisState.ChangesRecommended);
 
+                project.UpdatedNugets = true;
+
                 return new UpgradeStepApplyResult(UpgradeStepStatus.Complete, "Packages updated");
             }
 #pragma warning disable CA1031 // Do not catch general exception types

@@ -41,7 +41,8 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Solution
             _tfmSelector = tfmSelector ?? throw new ArgumentNullException(nameof(tfmSelector));
         }
 
-        protected override bool IsApplicableImpl(IUpgradeContext context) => context is not null && context.CurrentProject is null && context.Projects.Any(p => !IsCompleted(context, p)) && !context.IsComplete;
+        protected override bool IsApplicableImpl(IUpgradeContext context) =>
+            context is not null && context.CurrentProject is null && context.Projects.Any(p => !IsCompleted(context, p)) && !context.IsComplete;
 
         // This upgrade step is meant to be run fresh every time a new project needs selected
         protected override bool ShouldReset(IUpgradeContext context) => context?.CurrentProject is null && Status == UpgradeStepStatus.Complete;
@@ -124,7 +125,9 @@ namespace Microsoft.DotNet.UpgradeAssistant.Steps.Solution
 
         // Consider a project completely upgraded if it is SDK-style and has a TFM equal to (or greater then) the expected one
         private bool IsCompleted(IUpgradeContext context, IProject project) =>
-            project.GetFile().IsSdk && _tfmComparer.IsCompatible(project.TFM, _tfmSelector.SelectTFM(project));
+            project.GetFile().IsSdk &&
+            _tfmComparer.IsCompatible(project.TFM, _tfmSelector.SelectTFM(project)) &&
+            project.UpdatedNugets;
 
         private async Task<IProject> GetProject(IUpgradeContext context, Func<IUpgradeContext, IProject, bool> isProjectCompleted, CancellationToken token)
         {

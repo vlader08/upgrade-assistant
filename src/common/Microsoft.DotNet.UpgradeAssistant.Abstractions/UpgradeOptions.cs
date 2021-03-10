@@ -14,7 +14,7 @@ namespace Microsoft.DotNet.UpgradeAssistant
 
         public string[] Extension { get; set; } = Array.Empty<string>();
 
-        public bool SkipBackup { get; set; }
+        public bool SkipBackup { get; set; } = true;
 
         public string? EntryPoint { get; set; } = string.Empty;
 

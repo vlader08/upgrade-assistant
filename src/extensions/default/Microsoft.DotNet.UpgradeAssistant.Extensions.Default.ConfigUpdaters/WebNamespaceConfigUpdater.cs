@@ -24,7 +24,8 @@ namespace Microsoft.DotNet.UpgradeAssistant.Extensions.Default.ConfigUpdaters
 
         private static readonly string[] NamespacesToDrop = new[]
         {
-            "System.Web"
+            // System.Web
+            "DropMe.IfIm.Not.Needed"
         };
 
         private readonly ILogger<AppSettingsConfigUpdater> _logger;

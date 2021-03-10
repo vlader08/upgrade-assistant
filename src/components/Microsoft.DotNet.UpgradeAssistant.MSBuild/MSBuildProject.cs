@@ -281,6 +281,8 @@ namespace Microsoft.DotNet.UpgradeAssistant.MSBuild
 
         IProjectFile IProject.GetFile() => this;
 
+        public bool UpdatedNugets { get; set; }
+
         public override bool Equals(object? obj)
         {
             if (obj is MSBuildProject other)

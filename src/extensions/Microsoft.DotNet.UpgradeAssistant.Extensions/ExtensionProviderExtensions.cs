@@ -100,6 +100,7 @@ namespace Microsoft.DotNet.UpgradeAssistant.Extensions
                     }
 
                     var assembly = AssemblyLoadContext.Default.LoadFromStream(assemblyStream);
+
                     var serviceProviders = assembly.GetTypes()
                         .Where(t => t.IsPublic && !t.IsAbstract && t.IsAssignableTo(typeof(IExtensionServiceProvider)))
                         .Select(t => Activator.CreateInstance(t))
